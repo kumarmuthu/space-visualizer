@@ -103,10 +103,11 @@ function createPlanet(size,color,distance,speed,name){
   pivot.add(mesh);
   mesh.position.x=distance;
 
-  labels.push({mesh,label:createLabel(name)});
+  labels.push({mesh:mesh,label:createLabel(name)});
   return {mesh,pivot,speed};
 }
 
+// Planets
 const planets=[
 createPlanet(4,0xb5b5b5,60,0.04,"Mercury"),
 createPlanet(6,0xffa500,90,0.03,"Venus"),
@@ -127,7 +128,7 @@ const ringMat=new THREE.MeshBasicMaterial({
   opacity:0.6
 });
 const ring=new THREE.Mesh(ringGeo,ringMat);
-ring.rotation.x=Math.PI/2;
+ring.rotation.x=Math.PI/3;
 planets[5].mesh.add(ring);
 
 // Moon
