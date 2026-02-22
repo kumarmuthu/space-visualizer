@@ -3,10 +3,8 @@
 Interactive 3D Solar System built with Three.js featuring realistic orbits, planet labels, and smooth camera controls.
 
 🎥 **Live Preview (GitHub Pages)**  
-If deployed with GitHub Pages, your project will be accessible here:  
-```
+You can view the 3D Solar System project live here:  
 [https://kumarmuthu.github.io/space-visualizer/](https://kumarmuthu.github.io/space-visualizer/)
-```
 
 ---
 
