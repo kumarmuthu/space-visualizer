@@ -92,18 +92,46 @@ const sun=new THREE.Mesh(
 scene.add(sun);
 labels.push({mesh:sun,label:createLabel("Sun")});
 
-// Sun glow
-const textureLoader = new THREE.TextureLoader();
-const sunTexture = textureLoader.load('https://threejs.org/examples/textures/lensflare/lensflare0.png');
+// Canvas-generated glow texture (no external URL, no CORS issues)
+function createGlowTexture() {
+  const size = 256;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const center = size / 2;
+  const gradient = ctx.createRadialGradient(center, center, 0, center, center, center);
+  gradient.addColorStop(0,   'rgba(255, 220, 100, 1.0)');
+  gradient.addColorStop(0.2, 'rgba(255, 160, 40,  0.8)');
+  gradient.addColorStop(0.5, 'rgba(255, 100, 10,  0.3)');
+  gradient.addColorStop(1.0, 'rgba(0,   0,   0,   0.0)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, size, size);
+  return new THREE.CanvasTexture(canvas);
+}
+
 const spriteMaterial = new THREE.SpriteMaterial({
-  map: sunTexture,
-  color:0xffaa00,
+  map: createGlowTexture(),
+  color: 0xffaa00,
   blending: THREE.AdditiveBlending,
-  transparent:true
+  transparent: true
 });
 const sunGlow = new THREE.Sprite(spriteMaterial);
 sunGlow.scale.set(200,200,1);
 sun.add(sunGlow);
+
+// Orbit line creator
+function createOrbitLine(distance) {
+  const points = [];
+  const segments = 128;
+  for (let i = 0; i <= segments; i++) {
+    const angle = (i / segments) * Math.PI * 2;
+    points.push(new THREE.Vector3(Math.cos(angle) * distance, 0, Math.sin(angle) * distance));
+  }
+  const geo = new THREE.BufferGeometry().setFromPoints(points);
+  const mat = new THREE.LineBasicMaterial({ color: 0x444466, transparent: true, opacity: 0.5 });
+  scene.add(new THREE.Line(geo, mat));
+}
 
 // Planet creator
 function createPlanet(size,color,distance,speed,name){
@@ -116,19 +144,20 @@ function createPlanet(size,color,distance,speed,name){
   pivot.add(mesh);
   mesh.position.x=distance;
 
+  createOrbitLine(distance);
   labels.push({mesh,label:createLabel(name)});
   return {mesh,pivot,speed};
 }
 
 const planets=[
-createPlanet(4,0xb5b5b5,60,0.04,"Mercury"),
-createPlanet(6,0xffa500,90,0.03,"Venus"),
-createPlanet(7,0x1e90ff,120,0.02,"Earth"),
-createPlanet(5,0xff0000,150,0.018,"Mars"),
-createPlanet(15,0xff8c00,210,0.01,"Jupiter"),
-createPlanet(13,0xf5deb3,270,0.008,"Saturn"),
-createPlanet(10,0x66ccff,330,0.006,"Uranus"),
-createPlanet(10,0x3366ff,390,0.005,"Neptune")
+  createPlanet(4, 0xb5b5b5, 60,  0.04, "Mercury"),
+  createPlanet(6, 0xffa500, 90,  0.03, "Venus"),
+  createPlanet(7, 0x1e90ff, 120, 0.02, "Earth"),
+  createPlanet(5, 0xff0000, 150, 0.018,"Mars"),
+  createPlanet(15,0xff8c00, 210, 0.01, "Jupiter"),
+  createPlanet(13,0xf5deb3, 270, 0.008,"Saturn"),
+  createPlanet(10,0x66ccff, 330, 0.006,"Uranus"),
+  createPlanet(10,0x3366ff, 390, 0.005,"Neptune")
 ];
 
 // Saturn ring
