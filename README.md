@@ -6,10 +6,10 @@ Interactive 3D Solar System built with Three.js featuring realistic orbits, plan
 You can view the 3D Solar System project live here:  
 [https://kumarmuthu.github.io/space-visualizer/](https://kumarmuthu.github.io/space-visualizer/)
 
-| Version   | Link                                                                               | Description           |
-|-----------|------------------------------------------------------------------------------------|-----------------------|
+| Version   | Link                                                                                | Description           |
+|-----------|------------------------------------------------------------------------------------ |-----------------------|
 | 🪐 **V1** | [space-visualizer/V1](https://kumarmuthu.github.io/space-visualizer/V1/index.html) | Original Solar System |
-| ✨ **V2**  | [space-visualizer/V2](https://kumarmuthu.github.io/space-visualizer/index.html) | JPL Keplerian Edition |
+| ✨ **V2** | [space-visualizer/V2](https://kumarmuthu.github.io/space-visualizer/index.html)    | JPL Keplerian Edition |
 
 ---
 
