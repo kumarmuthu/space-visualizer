@@ -9,7 +9,7 @@ You can view the 3D Solar System project live here:
 | Version   | Link                                                                               | Description           |
 |-----------|------------------------------------------------------------------------------------|-----------------------|
 | 🪐 **V1** | [space-visualizer/V1](https://kumarmuthu.github.io/space-visualizer/V1/index.html) | Original Solar System |
-| ✨ **V2**  | [space-visualizer/V2](https://kumarmuthu.github.io/space-visualizer/V2/index.html) | JPL Keplerian Edition |
+| ✨ **V2**  | [space-visualizer/V2](https://kumarmuthu.github.io/space-visualizer/index.html) | JPL Keplerian Edition |
 
 ---
 
